@@ -1,4 +1,4 @@
-import { AuthController } from '../controllers/authController.js';
+import { AuthController } from '../controladores/authController.js';
 
 document.getElementById('loginForm').addEventListener('submit', function(event) {
   event.preventDefault();
