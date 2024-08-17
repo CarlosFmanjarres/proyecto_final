@@ -1,4 +1,4 @@
-import { User } from '../models/user.js';
+import { User } from '../modelos/usuario.js';
 
 export class AuthController {
   static register(name, email, password, role) {
