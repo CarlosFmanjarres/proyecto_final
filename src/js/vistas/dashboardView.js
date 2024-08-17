@@ -1,4 +1,4 @@
-import { ProjectController } from '../controllers/projectController.js';
+import { ProjectController } from '../controladores/projectController.js';
 
 window.onload = function() {
   let user = JSON.parse(localStorage.getItem('loggedInUser'));
