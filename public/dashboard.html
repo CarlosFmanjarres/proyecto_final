@@ -3,16 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Control</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Panel de control</title>
+  <link rel="stylesheet" href="../src/css/styles.css">
 </head>
 <body>
-  <div id="projects">
-    <h2>Mis Proyectos</h2>
-    <input type="text" id="filterName" placeholder="Buscar por nombre">
-    <button id="logout">Cerrar sesión</button>
-    <ul id="projectList"></ul>
-  </div>
-  <script src="../src/js/vistas/dashboardView.js"></script>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+        <li><a href="#">Registro</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Panel de control</h1>
+    <form id="project-form">
+      <label for="name">Nombre del proyecto:</label>
+      <input type="text" id="name" name="name">
+      <label for="description">Descripción del proyecto:</label>
+      <textarea id="description" name="description"></textarea>
+      <label for="status">Estado del proyecto:</label>
+      <select id="status" name="status">
+        <option value="pendiente">Pendiente</option>
+        <option value="en_progreso">En progreso</option>
+        <option value="completado">Completado</option>
+      </select>
+      <button type="submit">Agregar proyecto</button>
+    </form>
+    <div id="projects-list">
+      <!-- Lista de proyectos aquí -->
+    </div>
+  </main>
+  <script src="projectController.js"></script>
 </body>
 </html>

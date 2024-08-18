@@ -1,36 +1,34 @@
-import { User } from '../modelos/usuario.js';
+import { AuthController } from '../src/js/controladores/authController.js';
 
-export class AuthController {
-  static register(name, email, password, role) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^.{6,}$/;
+// Registro
+const registerForm = document.getElementById('register-form');
+if (registerForm) {
+  registerForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const role = event.target.role.value;
+    AuthController.register(name, email, password, role);
+  });
+}
 
-    if (!emailRegex.test(email)) {
-      alert('Formato de correo electrónico inválido.');
-      return false;
-    }
+// Inicio de sesión
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+  loginForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    AuthController.login(email, password);
+  });
+}
 
-    if (!passwordRegex.test(password)) {
-      alert('La contraseña debe tener al menos 6 caracteres.');
-      return false;
-    }
-
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(new User(name, email, password, role));
-    localStorage.setItem('users', JSON.stringify(users));
-    alert('Registro exitoso');
-    return true;
-  }
-
-  static login(email, password) {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    let user = users.find(user => user.email === email && user.password === password);
-    
-    if (user) {
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
-      window.location.href = 'dashboard.html';
-    } else {
-      alert('Credenciales incorrectas');
-    }
-  }
+// Cierre de sesión
+const logoutButton = document.getElementById('logout');
+if (logoutButton) {
+  logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login.html'; // Redirige a inicio de sesión
+  });
 }

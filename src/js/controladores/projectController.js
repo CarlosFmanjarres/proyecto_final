@@ -1,13 +1,20 @@
-import { Project } from '../modelos/proyecto.js';
+import { ProjectController } from '../src/js/controladores/projectController.js';
 
-export class ProjectController {
-  static getProjects() {
-    return JSON.parse(localStorage.getItem('projects')) || [];
-  }
+// Panel de control
+const projectForm = document.getElementById('project-form');
+if (projectForm) {
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (!loggedInUser) {
+    window.location.href = 'login.html'; // Redirige a inicio de sesión si no hay usuario autenticado
+  } else {
+    projectForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const name = event.target.name.value;
+      const description = event.target.description.value;
+      const status = event.target.status.value;
+      ProjectController.addProject(name, description, status, loggedInUser);
+    });
 
-  static saveProject(project) {
-    let projects = JSON.parse(localStorage.getItem('projects')) || [];
-    projects.push(project);
-    localStorage.setItem('projects', JSON.stringify(projects));
+    ProjectController.displayProjects(loggedInUser);
   }
 }
